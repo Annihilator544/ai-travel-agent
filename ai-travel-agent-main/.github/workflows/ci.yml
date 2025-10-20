@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+
+    - name: Compile check
+      run: |
+        python -m py_compile agents/agent.py
+
+    - name: Run tests (custom runner)
+      run: |
+        python run_tests.py
+
+    - name: Lint
+      run: |
+        flake8 . --max-line-length=120
+
+    - name: Export metrics snapshot
+      run: |
+        python export_metrics.py
+
+    - name: Upload metrics snapshot
+      uses: actions/upload-artifact@v4
+      with:
+        name: metrics_snapshot
+        path: metrics_snapshot.json
