@@ -1,7 +1,7 @@
 import os
 from typing import Optional
 import requests
-from langchain.pydantic_v1 import BaseModel, Field
+from pydantic import BaseModel, Field
 from langchain_core.tools import tool
 
 

@@ -51,7 +51,7 @@ pip install -r ai-travel-agent-main\requirements.txt
 pip install -r ai-travel-agent-main\requirements-dev.txt
 ```
 
-### 3. Configure environment variables
+### 3. Configure enviraonment variables
 
 Copy the example environment file and fill in your API keys:
 
@@ -75,6 +75,14 @@ cd ..
 ```powershell
 # From base directory (Travel Agent/)
 python run_fed_local.py
+# Navigate to project directory
+cd ai-travel-agent-main
+
+# Launch the interactive chatbot interface
+streamlit run app.py
+
+# When done, return to base directory
+cd ..
 ```
 
 ## Environment Variables & API Keys

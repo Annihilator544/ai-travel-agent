@@ -1,5 +1,5 @@
 from typing import Optional
-from langchain.pydantic_v1 import BaseModel, Field
+from pydantic import BaseModel, Field
 from langchain_core.tools import tool
 
 from agents.tools.flights_finder import FlightsInput, flights_finder
